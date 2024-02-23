@@ -1,0 +1,47 @@
+.booking-container{
+    display: block;
+    /* background-color: var(--var-white); */
+    /* border-radius: 1rem;
+    padding-block: 2rem; */
+}
+
+.bookingForm{
+    background-color: var(--var-white);
+    border-radius: 1rem;
+    padding: 2rem 1rem;
+    max-width: 40rem;
+    
+}
+
+.bookingForm  .formHeader{
+    background-color: var(--bg-color-section);
+    padding: 2rem .5rem;
+    letter-spacing: .1rem;
+    line-height: 2.7rem;
+    border-top-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+
+.formHeader h1{
+    margin-bottom: 2rem;
+}
+
+.bookingForm input[type=text]
+, .bookingForm input[type=date]
+,.bookingForm input[type=email]
+,.bookingForm select
+{
+    outline: none;
+    border: none;
+    border-bottom: .1rem solid var(--bg-blue);
+    margin-bottom: 2rem;
+}
+
+.bookingForm input:invalid{
+    content: 'invalid input';
+    outline: none;
+    border: none;
+    border-bottom: .14rem solid red;
+    margin-bottom: 2rem;
+}
+

@@ -1,0 +1,14 @@
+.clean-list{
+    border: none;
+    border-top: .2rem solid var(--bg-blue);
+    padding-block: 1rem;
+}
+
+.clean-list li{
+    list-style: none;
+}
+
+.clean-list li::before{
+    content: '\2713';
+    margin-right: 1rem;
+}

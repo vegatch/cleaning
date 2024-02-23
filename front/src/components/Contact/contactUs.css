@@ -1,0 +1,54 @@
+
+.contact_right_container{
+    box-shadow: .5rem .5rem var(--darkgray-line);
+    margin-block: 2rem;
+    box-sizing: border-box;
+    padding: 2rem;
+    background-color: var( --var-white );
+    border-radius: 1rem;
+}
+
+
+.contact_right_container input, .contact_right_container textarea{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+}
+.contact-wrapper{
+    margin-bottom: 2rem;
+}
+
+.contact-flex{
+    display: flex;
+    align-items: center;
+}
+
+.contact-flex p,
+.contact-flex div
+{
+    margin-left: .5rem;
+}
+
+.phone-contact-wrapper{
+    padding: 0;
+    /* background-color: red; */
+    text-align: start;
+    width: fit-content;
+}
+
+
+@media screen and (min-width:780px){ 
+    .contact-wrapper{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .contact_right_container,
+    .contact_left_container
+    {
+        width: 50%;
+        padding: 2rem;
+        margin-block: 1rem;
+        max-width: 500px;
+    }
+}

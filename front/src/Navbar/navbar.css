@@ -1,0 +1,250 @@
+
+header{
+  display: block;
+  width: 100%;
+  max-width: 1940px;
+  z-index: 9999;
+}
+
+.top-nav{
+  background-color: var(--bg-blue);  
+  padding-inline: 1rem;
+  padding-block: .4rem;
+  text-align: center;
+ 
+}
+
+.logoAndNav-container
+ {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
+  margin: 0;
+  height: auto;
+  /* margin-bottom: 20rem; */
+}
+
+
+
+nav {    
+    padding-block: 1rem;  
+}
+
+.toggle {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 2.1rem;
+    color: black;     
+  }
+  nav > ul{
+    padding: 1rem;
+  }
+
+  .menu-nav{
+    display: block;
+    position:absolute;
+    left:0;
+    margin-top: 0;
+    list-style: none;
+    background: var(--bg-color-pages);  
+    width: 100%;
+    max-width: 100%;
+    /* font-size: 1.8rem; */
+    font-size: clamp(1rem, 10vw, 2rem);
+    font-weight: bolder;
+    margin-top: 2rem;
+    transform: translate(-1rem);
+    transition: transform ease-in-out 0.2s;
+    transition: width ease 0.3s;      
+  }
+
+  
+  .show-menu{
+    margin-top: 2.8rem;
+    background-color: red;
+    padding-top: 0;
+  }
+  
+  .hide-menu{
+    display: none;
+  }
+
+  nav  > ul > li {
+    padding: 1rem;  
+  }
+
+  nav  > ul > li a{
+    text-decoration: none;
+    color: var(--bg-blue)    
+  }
+  /* nav .menu-nav {
+    list-style: none;
+    position: absolute;
+    background: var(--bg-color-pages);
+    left:0;
+    top: 75%;
+    width: 0;
+    overflow: hidden;
+    max-width: 100%;
+    z-index: 9;
+    font-size: 18px;
+    box-shadow: 0 10px 15px -3px rgb(46 41 51 / 8%), 0 4px 6px -2px rgb(71 63 79 / 16%);
+    transform: translateX(-100px);
+    transition: transform ease-in-out 0.2s;
+    transition: width ease 0.3s;
+  }
+  .menu-nav.show-menu {
+    width: 100%;
+    top: 12%;
+    text-align: left;
+    transform: translateX(0px);
+  }
+  .menu-nav li a, .menu-nav li span {
+    display: block;
+    padding: .5rem 0;
+    color:var(--bg-blue);
+    text-align: left;
+  }
+  
+  .menu-nav li a:active{
+    text-underline-position: none;
+  } */
+
+  
+  
+  @media screen and (min-width:870px){    
+    
+    .nav-hamburger, .toggle{
+      display:none;
+        }
+      
+        
+    nav .menu-nav 
+        {
+         all:initial;
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+        }
+nav{
+  padding: 1rem;
+  
+}
+        nav .menu-nav li{
+          list-style: none;
+          text-decoration: none;
+          font-size: 1.6rem;
+          font-weight: bolder;
+          
+        }
+        nav .menu-nav a{
+          margin-left: .3rem;
+          color: var(--bg-blue);
+        }
+
+
+        nav .menu-nav li a:hover{
+          text-decoration: underline;
+          font-size: 1.63rem;
+          
+        }
+
+        nav .menu-nav li a:active{
+          /* font-size: 1.5rem; */
+          text-decoration: underline;
+          
+        }
+
+        nav > ul > li > a:active {
+          background: #A9DB73;
+          color: #333;
+          border-bottom: 1px solid #fff; }
+     
+    
+  } 
+
+/* try */
+  /* header{
+    background-color: var(--bg-blue);
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    z-index:999;
+  }
+
+  .logo-container{
+    margin: 0;
+    width: 4rem;
+    background-color: white;
+    padding: .5rem;
+  }
+
+  .toggleNav{
+    display: none;
+  }
+  .nav-label{
+    position: absolute;
+    color: white;
+    top: 4rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+  }
+
+  nav{
+    position: absolute;
+    text-align: left;
+    background-color: brown;
+    top:100%;
+    left:0;
+    width: 100%;
+    
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 400ms ease-in-out;
+  }
+
+  nav ul{
+    padding: 1rem;
+    margin: 0;
+    list-style: none;
+  }
+
+  nav li{
+    margin-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  nav a{
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 100ms ease-in-out;
+  }
+
+  nav a:hover{
+    color:red;
+  }
+
+  .toggleNav:checked ~ nav{
+    transform: scale(1, 1);
+  }
+
+  .toggleNav:checked ~ nav a{
+    opacity: 1;
+    transition: opacity 300ms ease-in-out 300ms;
+  }
+
+
+  @media screen and (min-width:800px){
+    .nav-label{
+      display: none;
+    }
+
+    
+    
+  } */
+    
+  

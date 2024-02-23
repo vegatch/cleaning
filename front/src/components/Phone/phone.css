@@ -1,0 +1,29 @@
+
+.phone-container
+{
+    font-weight: larger;
+    padding: 0;
+
+}
+
+
+.phone-container a{
+    list-style-type: none;
+    list-style: none;
+    text-decoration: none;
+    /* text-align: center; */
+    font-weight: bold;
+    padding: 0;
+}
+
+.light{
+    color: white;
+}
+
+.dark{
+    color: var(--bg-blue);
+}
+
+
+
+

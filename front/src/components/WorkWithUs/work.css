@@ -1,0 +1,9 @@
+.residential > div{
+    border-top: .1rem solid darkgray;
+    padding-inline: 1rem;
+}
+
+.box-container{
+    padding-block: 2rem;
+    background-color: antiquewhite;
+}

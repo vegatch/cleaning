@@ -1,0 +1,60 @@
+.section-container{
+    margin-block:2rem;
+}
+
+.faq-container .faq-question{
+    font-weight: bold;
+}
+
+
+.faq-wrapper li{
+    list-style: none;
+    text-decoration: none;
+}
+
+.categ-container > label
+,.categ-container > label ~ div
+{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 1rem;
+    width: 100%;
+    text-align: start;
+    border-top: .01rem solid darkgray;
+}
+
+.referral {
+    border-bottom: .02rem solid darkgray;
+    /* background-color: brown; */
+}
+
+
+
+.questionAnswer-wrapper li p:first-child{
+    font-weight: bold;
+}
+
+.faq-wrapper input[type=checkbox]{    
+   display: none;
+   
+}
+
+.categ-container > label{
+    cursor: pointer;  
+    /* width: 80%;   */
+}
+
+.categ-container > label ~ div{
+    float: right;  
+    width: 2%;
+}
+
+.categ-container{
+    display: flex;
+    align-items: center;
+}
+
+

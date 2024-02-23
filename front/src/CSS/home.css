@@ -1,0 +1,29 @@
+.benefit-section,
+.contact-section{
+    background-color: var(--bg-color-section);
+    padding-block: 1rem;
+}
+
+.contact-section{
+    padding-inline: .5rem;
+}
+
+.hero-section{
+    background-color: var(--bg-color-intro);    
+}
+
+.benefit-section h3,
+.faq-section h3,
+.contact-section > h3{
+    text-align: center;
+}
+
+
+.form-section-header > div{
+    /* position: relative; */
+    top:-1rem;
+    color: var(--bg-color-intro);
+    background-color: var(--bg-blue);
+    width: 40%;
+    padding: .01rem;
+}

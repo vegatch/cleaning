@@ -1,0 +1,9 @@
+/* .App{
+  padding: 0 1rem ;
+  color: darkgray;
+  font-size: 1rem;
+} */
+
+.App{
+  overflow:auto
+}

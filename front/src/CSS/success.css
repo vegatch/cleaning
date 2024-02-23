@@ -1,0 +1,22 @@
+.thanks-container{
+    padding: 4rem  1rem;
+    margin-block: 2rem;
+    text-align: center;
+    background-color: var(--bg-color-section);
+    border-top-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+}
+
+.thanks-container p{
+    letter-spacing: .1rem;
+    font-size: 1.6rem;
+    margin-top: 3rem;
+
+}
+
+
+
+.thanks-container h1{
+    letter-spacing: .1rem;
+    margin-bottom: 1rem;
+}

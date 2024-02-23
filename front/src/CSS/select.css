@@ -1,0 +1,39 @@
+/* 
+.select-wrapper{
+    width: 100%;
+}
+
+select {
+    width: 100%;    
+  }
+
+
+.select-wrapper select {  
+  color: inherit;
+  font-size: 1rem;
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+.select-wrapper::before {
+  font-family: inherit;
+  position: absolute;
+  width: 20%;
+  height: 100%;
+  line-height: 1rem;
+  border: none;
+  outline: none;
+  pointer-events: none;
+}
+
+.select-wrapper:hover::before {
+  color: black;
+}
+
+.select-wrapper select option {
+  padding: .2rem;
+}
+
+
+ */

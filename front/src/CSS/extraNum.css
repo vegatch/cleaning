@@ -1,0 +1,9 @@
+
+.extra-container > label{
+    float: right;
+}
+
+input[type=number]{
+    width: 2rem;
+    margin: 0 .5rem;
+}

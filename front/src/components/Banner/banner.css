@@ -1,0 +1,12 @@
+.banner-container{
+    text-align: center;
+    font-weight: bold;
+    padding: 2rem 1rem;
+    border-top: .4rem solid var(--bg-blue);
+    border-bottom: .4rem solid var(--bg-blue);
+    margin-block: 2rem;
+}
+
+.banner-container img{
+    min-height: 100%;
+}
