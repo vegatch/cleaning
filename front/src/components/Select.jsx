@@ -6,6 +6,8 @@ const SelectItem = ({
 
   name,
 
+  required,
+
   options,
 
   onChange,
@@ -16,7 +18,7 @@ const SelectItem = ({
     
     <label>
       {label}
-      <select id={id} name={name} onChange={onChange} >
+      <select id={id} name={name} onChange={onChange} required={required}>
         <option value='' hidden> Select an option</option>
         {options.map(option => (
           <option key={option.value} value={option.value}>

@@ -66,8 +66,6 @@ const Home = () => {
             <div className="hero-section">
                 <Hero mainMessage= {messageImporant} message={intro} picture={HeroImg} picturedesc={imgdesc} lblbtn='Get a quote'/>
             </div>
-            {/* ads, lblforPhone, lblforbtn */}
-            
             {/* People I work with */}
             <div className="benefit-section">
                 <h3>Why working with us</h3>
@@ -82,21 +80,21 @@ const Home = () => {
                     })
                 }
             </div>
+            {/* Ads banner */}
             <div>
                 <Banner /> 
             </div>
             {/* FAQ section */}
             <div className="faq-section">
                 <h3>Frequently asked questions</h3>
-                <Faq />         
-            
+                <Faq />             
             </div>
             {/* Serives and Products */}
             <div>
                 <Ads />
             </div>
-            {/* Contact us Section */}
-            <div className="contact-section">
+             {/* Contact us Section */}
+             <div className="contact-section">
                 <h3>Still have a question? 
                 </h3>
                 <div>
@@ -104,13 +102,11 @@ const Home = () => {
                 </div>
             </div>
             <div>
-                <Banner 
-                    lblforbtn='Get quote or book online' 
-                    lblforPhone='Call us at ' 
-                    ads='Your search for cleaning service ends here.'
-                /> 
+                <Banner /> 
             </div>
+            
         </div>
+        
         
         )
 }

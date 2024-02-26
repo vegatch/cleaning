@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import Textarea from "../Textarea/TextArea.jsx";
 import Button from '../Button/Button.jsx';
 import { HiMail } from 'react-icons/hi';
@@ -11,7 +12,8 @@ import FormValidation from '../utilities/Validation.jsx';
 import './contactUs.css';
 
 
-
+// https://simplefrontend.com/redirect-to-another-page-in-react/
+// very helpful to redirect to successpage
 
 const ContactUs = () => {
 
@@ -25,7 +27,9 @@ const ContactUs = () => {
     const [formError, setFormError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [serverError, setServerError] = useState(null);
+    const [redirect, setRedirect] = React.useState(false);
 
+    
      
       const handleFormChange = (e) => {
         setMessageState((prevState) => ({
@@ -65,13 +69,14 @@ const ContactUs = () => {
             if (resData.status === "success") {
               // alert("Message Sent");
               setIsLoading(false)
-              window.location.href ="/SuccessPage";
+              setRedirect(true)
             } else if (resData.status === "fail") {
               // alert("Message failed to send");
               setServerError('Something went wrong') 
+              throw new Error(`HTTP error! status: ${resData.status}`);
             }
           })
-          .catch((error) => {console.log(error)})
+          .catch((error) => {setServerError(error); console.log(error)})
           .finally(() => {
             setMessageState(initialState);
           })
@@ -80,63 +85,7 @@ const ContactUs = () => {
          
        }
     }
-
-    //     // await fetch("http://localhost:3001/contact", {
-    //     //     method: "POST",
-    //     //     headers: {
-    //     //       "Content-type": "application/json",
-    //     //     },
-    //     //     body: JSON.stringify({ messageState }),
-            
-    //     //   })
-    //     //     .then((res) => res.json())
-    //     //     .then(async (res) => {
-    //     //       const resData = await res;
-    //     //       if (resData.status === "success") {
-    //     //         // alert("Message Sent");
-    //     //         window.location.href ="/SuccessPage";
-    //     //       } else if (resData.status === "fail") {
-    //     //         alert("Message failed to send");
-    //     //       }
-    //     //     })
-    //     //     .then(() => {
-    //     //       setMessageState(initialState);
-    //     //     });
-        
-    //     // end
-        
-    //   //  }else{
-    //   //   console.log('error', formError)
-    //   //  }
-    //       // start
-          
-    //       // await fetch("http://localhost:3001/contact", {
-    //       //   method: "POST",
-    //       //   headers: {
-    //       //     "Content-type": "application/json",
-    //       //   },
-    //       //   body: JSON.stringify({ messageState }),
-            
-    //       // })
-    //       //   .then((res) => res.json())
-    //       //   .then(async (res) => {
-    //       //     const resData = await res;
-    //       //     if (resData.status === "success") {
-    //       //       alert("Message Sent");
-    //       //     } else if (resData.status === "fail") {
-    //       //       alert("Message failed to send");
-    //       //     }
-    //       //   })
-    //       //   .then(() => {
-    //       //     setMessageState(initialState);
-    //       //   });
-
-    //       // // end
-        
-          
-        
-    //   }          
-    // }
+     
 
     
         
@@ -144,32 +93,28 @@ const ContactUs = () => {
     const contactArray = [
         {
           id: 1,
-          name: "client_name",
+          name: "fullname",
           type: "text",
           placeholder: "First and Last name",
-          errorMessage: "Name is required",
           label: "Fullname",
           maxLength:'40',
           required: true,
         },
         {
             id: 2,
-            name: "client_email",
+            name: "email",
             type: "email",
-            placeholder: "text",
-            errorMessage: "email format expected",
-            pattern:  "^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$",           
-            
+            placeholder: "text",     
+            pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ ,
             label: "Email",
             maxLength:'',
             required: true,
           },
           {
             id: 3,
-            name: "phone_number",
+            name: "phonenumber",
             type: "text",
             placeholder: "000-000-0000",
-            errorMessage: "format 000-000-0000 expected",
             label: "Phone number",
             pattern: `^[0-9]{3}-[0-9]{3}-[0-9]{4}$` ,
             maxLength:'13',
@@ -180,7 +125,6 @@ const ContactUs = () => {
             name: "message",
             type: "textarea",
             placeholder: "please enter your message",
-            errorMessage: "Cannot be null",
             label: "Message",
             maxLength:'300',
             minLength:'10',
@@ -201,50 +145,56 @@ const ContactUs = () => {
                     <ImLocation/> <p>Indianapolis, IN</p>
                 </div>
             </div>
-            <form  onSubmit={handleSubmit} className="contact_right_container">
-              <div>
-              
-                {isLoading && <span> Submitting...</span>}
-                {serverError && <span>Something went wrong</span>}
-                <p className="errorDisplay"> {formError.fullname} </p>
-                <p className="errorDisplay"> {formError.email} </p>
-                <p className="errorDisplay"> {formError.phonenumber} </p>
-                <p className="errorDisplay"> {formError.message} </p>
-               
-                {/* {formError.email && <p>{formError.email}</p>} */}
-              </div>
+            <div>
+              <form  onSubmit={handleSubmit} className="contact_right_container">
                 <div>
-                  {/* {fetchError && <p>{fetchError}</p>} */}
-                    {contactArray.slice(0,-1).map((input) => (
-                        <Input
-                        key={input.id}
-                        {...input}
-                        value={messageState[input.name]}
-                        errorMessage ={input.errorMessage}
-                        pattern={input.pattern}
-                        onChange={handleFormChange}
-                        maxLength={input.maxLength}
-                        minLength={input.minLength}
-                        // onBlur={handleValidation} 
-                        
-                        />                        
-                    ))}
-                </div>            
-                <div>
-                    {contactArray.slice(-1).map((input) => (
-                        <Textarea
-                        key={input.id}
-                        {...input}            
-                        value={messageState[input.name]}
-                        onChange={handleFormChange}
-                        maxLength={input.maxLength}
-                        minLength={input.minLength}
-                        />
-                    ))}
+                
+                  {isLoading && <span> Submitting...</span>}
+                  {serverError && <span>Something went wrong </span>}
+                  <p className="errorDisplay"> {formError.fullname} </p>
+                  <p className="errorDisplay"> {formError.email} </p>
+                  <p className="errorDisplay"> {formError.phonenumber} </p>
+                  <p className="errorDisplay"> {formError.message} </p>
+                
+                  {/* {formError.email && <p>{formError.email}</p>} */}
                 </div>
-                <Button className='main-btn'   onClick ={handleSubmit} label='Send us your message'/>
-                {/* <button className='main-btn'>send</button> */}
-            </form>
+                  <div>
+                    {/* {fetchError && <p>{fetchError}</p>} */}
+                      {contactArray.slice(0,-1).map((input) => (
+                          <Input
+                          key={input.id}
+                          {...input}
+                          value={messageState[input.name]}
+                          pattern={input.pattern}
+                          onChange={handleFormChange}
+                          maxLength={input.maxLength}
+                          minLength={input.minLength}
+                          // onBlur={handleValidation} 
+                          
+                          />                        
+                      ))}
+                  </div>            
+                  <div>
+                      {contactArray.slice(-1).map((input) => (
+                          <Textarea
+                          key={input.id}
+                          {...input}            
+                          value={messageState[input.name]}
+                          onChange={handleFormChange}
+                          maxLength={input.maxLength}
+                          minLength={input.minLength}
+                          />
+                      ))}
+                  </div>
+                  <Button className='main-btn'   onClick ={handleSubmit} label='Send us your message'/>
+                  {/* <button className='main-btn'>send</button> */}
+              </form>
+              {
+                redirect ? (
+                    <Navigate replace to="/SuccessPage" />
+                  ) : null
+              }
+            </div>
         </div>
     )
   

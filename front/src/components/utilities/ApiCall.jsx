@@ -1,22 +1,22 @@
-import { useState, useCallback } from 'react';
-import axios from 'axios';
+// import React from "react";
 
-export default function usePost(url) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
 
-  const makeRequest = useCallback(async (requestData) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await axios.post(url, requestData);
-      setData(response.data);
-    } catch (err) {
-      setError(err);
-    }
-    setIsLoading(false);
-  }, [url]);
 
-  return { makeRequest, data, isLoading, error };
+const fetchPost = async (formData) => {
+  try {
+    const response = await fetch("http://localhost:3001/quoteRequest", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+    console.log("Success:", result);
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
+
+export default fetchPost;

@@ -1,6 +1,7 @@
 
 .contact_right_container{
-    box-shadow: .5rem .5rem var(--darkgray-line);
+    /* box-shadow: .5rem .5rem var(--darkgray-line); */
+    box-shadow:  0 0 .4rem var(--darkgray-line);
     margin-block: 2rem;
     box-sizing: border-box;
     padding: 2rem;

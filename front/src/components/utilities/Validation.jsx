@@ -3,10 +3,6 @@ const FormValidation = (formState) =>{
     const validEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ ;
     const phoneFormat = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
 
-
-     
-
-
     
     if(formState.fullname === ''){
         validationError.fullname ='Name is required'
@@ -19,7 +15,7 @@ const FormValidation = (formState) =>{
     if(formState.email === ''){
         validationError.email ='Email is required'
         
-    }else if(!validEmail.test(formState.client_email)){
+    }else if(!validEmail.test(formState.email)){
         validationError.email ='Email is incorrect'
         
     }

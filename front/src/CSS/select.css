@@ -37,3 +37,7 @@ select {
 
 
  */
+
+ select:invalid{
+  border: .3rem solid red;
+ }

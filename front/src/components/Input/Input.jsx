@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './input.css'
 
-const Input = ({ id, label, errorMessage, onChange, type, required, ...inputProps }) => {
+const Input = ({ id, label, onChange, type, required, ...inputProps }) => {
   const [focused, setFocused] = useState(false);
 
   const handleFocused = () => {
@@ -10,7 +10,7 @@ const Input = ({ id, label, errorMessage, onChange, type, required, ...inputProp
 
   return (
     <div className="form-input">
-      <label htmlFor="id">{label}</label>
+      <label>{label}
       <input
         {...inputProps}
         required={required}
@@ -20,7 +20,9 @@ const Input = ({ id, label, errorMessage, onChange, type, required, ...inputProp
         focused={focused.toString()}
         onFocus={() => inputProps.name === "message" && setFocused(true)}
       />
-      <span className="error-message">{errorMessage}</span>
+      {/* <p>{errMsg}</p> */}
+      {/* <span className="error-message">{errorMsg}</span> */}
+      </label>
     </div>
   );
 };

@@ -85,19 +85,19 @@ const Ads = () =>{
             desc:'Bath tubs'
         },
         {
-            id:20,
+            id:21,
             desc:'Make beds'
         },
         {
-            id:21,
+            id:22,
             desc:'Table tops'
         },
         {
-            id:22,
+            id:23,
             desc:'Hallways'
         },
         {
-            id:23,
+            id:24,
             desc:'Staircases'
         },
         
@@ -200,9 +200,7 @@ const Ads = () =>{
                     }
                 </div>
             </div>
-            <div></div>
-            <div></div>
-            <div></div>
+
         </div>
     )
 }

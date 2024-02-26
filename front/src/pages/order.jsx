@@ -1,19 +1,22 @@
 import {useState, useEffect, React} from 'react';
 // import moment from"moment";
-import FormInput from '../components/Input.jsx';
+// import FormInput from '../components/Input.jsx';
+import FormInput from '../components/Input/Input.jsx';
 import SelectItem from '../components/Select.jsx';
 import Extra from '../components/Extra.jsx'
 import Radio from '../components/RadioButton.jsx'
-import FormValidation from '../components/utilities/Validation.jsx';
+// import FormValidation from '../components/utilities/Validation.jsx';
+// import fetchPost from '../components/utilities/ApiCall.jsx';
 import '../CSS/order.css'
 // import '../CSS/extra.css';
 
 const Order = () => {  
 
-  const initialState = {
-    // frut:'',
+  const initialState = {  
     cleaningFrequency:'',
-      fullname: "",
+      firstname: "",
+      middlename: "",
+      lastname: "",
       email: "",
       phonenumber: "",
       streetAddress:'',
@@ -42,9 +45,9 @@ const Order = () => {
          
   }
 
-  const [formValues, setFormValues] = useState(() => initialState);
-  const [formError, setFormError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [formValues, setFormValues] = useState(initialState);
+  const [total, setTotal] = useState(0)
+  
 
   const headForm = 'Get your quote or booking today';
 
@@ -144,30 +147,43 @@ const Order = () => {
     const personalArray = [
       {
         id: 1,
-        name: "fullname",
+        name: "firstname",
         type: "text",
-        placeholder: "fullname",
-        errorMessage:
-          "Can't be empty",
-        label: "Fullname",
-        // pattern: "/^[a-z ,.'-]+$/i",
+        placeholder: "first name",
+        label: "First name",
         required: true,
-      },     
-
+      },    
       {
         id: 2,
+        name: "middlename",
+        type: "text",
+        placeholder: "middle name",
+        label: "Middle name",
+        required: true,
+      },     
+      {
+        id: 3,
+        name: "lastname",
+        type: "text",
+        placeholder: "last name",
+        label: "Last name",
+        // pattern: "/^[aA-zZ]+$/i",
+        required: true,
+      },    
+
+      {
+        id: 4,
         name: "email",
         type: "email",
         placeholder: "Ex: benskya@benskya.com",
         label: "email",
       },
       {
-        id: 3,
+        id: 5,
         name: "phonenumber",
         type: "text",
         placeholder: "Ex: 000-000-0000",
-        errorMessage:
-          "numbers and - accepted and format should be as follow 000-000-0000",
+       
         label: "phonenumber",
         pattern: `^[0-9]{3}-[0-9]{3}-[0-9]{4}$`,
         required: true,
@@ -181,9 +197,8 @@ const Order = () => {
         name: "streetAddress",
         type: "text",
         placeholder: "Street address",
-        errorMessage: "Cannot be null",
         label: "Street address",
-        required: true,
+        required:true,
       },
       
       {
@@ -191,9 +206,8 @@ const Order = () => {
         name: "apartNum",
         type: "text",
         placeholder: "Apartment number",
-        errorMessage: "Cannot be null",
         label: "Apartment number",
-        required: false,
+        
       },
 
       {
@@ -201,7 +215,6 @@ const Order = () => {
         name: "city",
         type: "text",
         placeholder: "City",
-        errorMessage: "Cannot be null",
         label: "City",
         required: true,
       },
@@ -213,7 +226,6 @@ const Order = () => {
         name: "cleaningDate",
         type: "date",
         placeholder: "cleaningDate",
-        errorMessage: "date expected",
         label: "cleaning date",
         // pattern: values.password,
         required: true,
@@ -221,77 +233,18 @@ const Order = () => {
 
     ];
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      if(formValues.oven === false ){
-        formValues.numOven = ''
-      }
-      if(formValues.fridge === false ){
-        formValues.numFridge = ''
-      }
-      if(formValues.fan === false ){
-        formValues.numFan = ''
-      }
-      if(formValues.blind === false ){
-        formValues.numBlind = ''
-      }
-      if(formValues.laundry === false ){
-        formValues.numLaundry = ''
-      }
-      if(formValues.window === false ){
-        formValues.numWindow = ''
-      }
-      const myUrl = "http://localhost:3001/contact";
-      console.log('from onSubmit in order', formValues)
-      setFormError( FormValidation(formValues))
-      if(Object.keys(FormValidation(formValues)).length === 0){
 
-      }
-      //   send form to backend
-      setIsLoading(true)
-      await fetch(myUrl, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ formValues }),
-        
-      }).then((res) => res.json())
-      .then(async (res) => {
-        const resData = await res;
-        console.log(resData);
-        if (resData.status === "success") {
-          alert("Message Sent");
-        } else if (resData.status === "fail") {
-          alert("Message failed to send");
-        }
-      })
-      .then(() => {
-        setFormValues(initialState)
-      })
-      
-      // end send to backend
-    };
-    
- 
-      
-
-    
     const handleFormChange = e => {
       const name = e.target.name;
-      const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;      
+      const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;      
 
       setFormValues((prev) =>{
         return { ...prev, [name]: value}
       })      
     }
-
-    
-   const [total, setTotal] = useState(0)
   
-    useEffect(() => {
     
+    useEffect(() => {    
       const quote = () =>{
        
         let bath = Number(formValues.selectBathNum);
@@ -305,35 +258,35 @@ const Order = () => {
   
         let fridge = ''
         if(formValues.fridge === true){
-          fridge = isNaN(formValues.numFridge) ? 0:  Number(formValues.numFridge) * Number(extraItem.fridge.price)
+          fridge = isNaN(formValues.numFridge) ? 0:  Number(formValues.numFridge) * 20
         }else{
           fridge = 0
         }
   
         let window = ''
         if(formValues.window === true){
-          window = isNaN(formValues.numWindow) ? 0:  Number(formValues.numWindow) * Number(extraItem.window.price) 
+          window = isNaN(formValues.numWindow) ? 0:  Number(formValues.numWindow) * 5 
         }else{
           window = 0
         }
         
         let fan = ''
         if(formValues.fan === true){
-          fan = isNaN(formValues.numFan) ? 0:  Number(formValues.numFan) * Number(extraItem.fan.price)
+          fan = isNaN(formValues.numFan) ? 0:  Number(formValues.numFan) * 5
         }else{
           fan = 0
         }
         
         let laundry = ''
         if(formValues.laundry === true){
-          laundry = isNaN(formValues.numLaundry) ? 0:  Number(formValues.numLaundry) * Number(extraItem.laundry.price) 
+          laundry = isNaN(formValues.numLaundry) ? 0:  Number(formValues.numLaundry) * 40 
         }else{
           laundry = 0
         }
         
         let blind = ''
         if(formValues.blind === true){
-          blind = isNaN(formValues.numBlind) ? 0:  Number(formValues.numBlind) * Number(extraItem.blind.price)
+          blind = isNaN(formValues.numBlind) ? 0:  Number(formValues.numBlind) * 5
         }else{
           blind = 0
         }
@@ -393,11 +346,52 @@ const Order = () => {
        
       
   
-    };
-  
-      quote();
-      
+      }; 
+      quote()
     }, [formValues])
+   
+    
+  
+  
+  const handleSubmit = async (e) => {
+      e.preventDefault();         
+      const myUrl = "http://localhost:4001/api/employees";
+     
+      
+      // start
+      await fetch(myUrl, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ formValues }),
+        
+      })
+        .then((res) => res.json())
+        .then(async (res) => {
+          const resData = await res;
+          if (resData.status === "success") {            
+            window.location.href ="/SuccessPage";
+          } else if (resData.status === "fail") {
+            throw new Error(`HTTP error! status: ${resData.status}`);
+          }
+        })
+        .catch((error) => { console.log(error)})
+        .finally(() => {
+          console.log(initialState);
+        })
+      
+    // END
+      
+    
+  }
+      
+
+    
+
+    
+   
+  
     
     console.log(total)
 
@@ -405,13 +399,7 @@ const Order = () => {
       <div className=" booking-container">        
         
         <form onSubmit={handleSubmit} className='bookingForm'>   
-                {isLoading && <span> Submitting...</span>}
-                {/* {serverError && <span>Something went wrong</span>} */}
-                <p className="errorDisplay"> {formError.fullname} </p>
-                <p className="errorDisplay"> {formError.email} </p>
-                <p className="errorDisplay"> {formError.phonenumber} </p>
-                <p className="errorDisplay"> {formError.message} </p>
-
+                
           <div className='form-container'>
             <div className='formHeader'>
               <h1>{headForm}</h1>
@@ -422,6 +410,7 @@ const Order = () => {
             <FormInput
               key={input.id}
               {...input}
+              type={input.type}
               value={formValues[input.name]}
               onChange={handleFormChange}
             />
@@ -571,7 +560,7 @@ const Order = () => {
       />
         </div>
 
-          <button>Submit</button>
+          <button onClick={handleSubmit}>Submit</button>
           </div>
          
         </form>   
