@@ -1,0 +1,183 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+
+    <style>
+      body { 
+        color: black; 
+        font-size: 0.9rem;      
+      }
+
+        *,
+        *:before,
+        *:after {
+          box-sizing: border-box;          
+        }
+
+      h1, h2 { color: red }
+      
+      .flex{
+        border-bottom: .3rem solid navy;
+        width: 100%;
+        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
+        background-color: brown;
+      }
+
+      .flex  .row-left
+      ,.flex  .row-right
+      {
+        color: navy;
+        font-weight: bold;     
+      }      
+
+      .row-left{
+          text-align: left;
+          margin-left: 0.5rem;
+          font-size: 1.6rem;
+        }
+
+        .row-right{
+          text-align: right;
+          float: right;
+          margin-right: 0.5rem;
+          font-size: 1.2rem;
+        }
+      
+      .neader_quotation
+        {
+          display: block;
+          width: 80vw;
+          border-bottom: .1rem solid navy;
+          margin: 0 auto;
+        }
+        
+        
+        
+        .quotation-left{
+          margin-bottom: 2rem;
+        }
+
+        .quotation-left p{
+          margin-bottom: 0.2rem;
+          font-weight: 900;
+        }
+
+        .quotation-left span
+        ,.quotation-right span{
+          line-height: 1.8rem;
+        }
+
+        .quotation-right span {
+          text-decoration: underline;
+          font-weight: 900;
+        }
+
+        .quotation-title{
+          font-weight: bolder;
+          text-align: center;
+          margin-block: 2rem;
+        }
+
+        .table-head{
+          background-color: lightgray;
+          font-weight: 900;
+          width: 100%;
+          margin: 0 auto;
+          border: none;
+          outline: none;          
+          padding: 0.7rem 0.5rem;
+        }
+
+        .table-head,
+        .table-row-money{
+          border-bottom: .1rem solid black;
+          border-top: .1rem solid black;
+          padding: 0.7rem 0.5rem;
+        }
+
+        .table-right{
+          float: right;
+          text-align: right;
+        }
+
+        .table-row{
+          padding: 0 0.5rem;
+        }
+
+        .table-row .cleanType{
+          font-weight: 800;
+        }
+
+        .table-row .clean-item{
+          padding-left: 1.4rem;
+        }
+
+        .table-row-money .money-row{
+          font-size: 1.7rem;
+        }
+        
+
+    </style>
+
+  </head>
+  <body>
+      <h1>{{title}}</h1>
+      <div class="flex"> 
+          <span class="flex-row row-left"> Benskya</span> 
+          <span class="row-right"> Booking</span>
+      </div>
+      <h2>{{subTitle}}</h2>
+      
+    <div class="neader_quotation">
+        <div class="quotation-left">
+            <div>
+              <p> {{customer_greet}}</p>
+            </div>  
+            <div> <span> {{Name}}</span>  </div> 
+            <div> <span> {{Address}}</span>  </div> 
+            <div> <span> {{Phone}}</span>  </div> 
+            
+        </div>
+        <div class="quotation-right">
+            <div> Quote #: <span>{{Quote_id}}</span> </div>
+            <div> Quote date: <span>{{Request_Date}}</span> </div>
+            <div> Cleaning Date: <span>{{Clean_date}}</span> </div> 
+        </div>
+        <div class="quotation-title"> <h2> Quotation - only</h2></div>
+        <div class="table-head">
+            <span class="table-left"> Description</span>
+            <span class="table-right">Amount </span>
+        </div>
+        <div class="table-row">
+            <p class="table-left cleanType"> {{CleanDesc}} </p>
+           <div class="clean-item"> &#10003;  # of Bed: <strong class="table-left"> {{Bedroom_num}} </strong> </div> 
+           <div class="clean-item"> &#10003;  # of Bath: <strong class="table-left"> {{Bathroom_num}} </strong> </div>
+           <div class="clean-item">  <strong class="table-left"> Special request </strong> </div> 
+           <div class="clean-item"> &#10003;  # of Oven: <strong class="table-left"> {{Oven_num}} </strong> </div> 
+           <div class="clean-item"> &#10003;  # of Fridge: <strong class="table-left"> {{Fridge_num}} </strong> </div>
+           <div class="clean-item"> &#10003;  # of Window: <strong class="table-left"> {{Window_num}} </strong> </div> 
+           <div class="clean-item"> &#10003;  # of Ceiling Fan: <strong class="table-left"> {{Fan_num}} </strong> </div>
+           <div class="clean-item"> &#10003;  # of Blind: <strong class="table-left"> {{blind_num}} </strong> </div> 
+           <div class="clean-item"> &#10003;  # of Laundry: <strong class="table-left"> {{Laundry_num}} </strong> </div>       
+       
+        </div>
+
+        <div class="table-row-money">
+            <span class="table-left "> Subtotal: </span>
+            <span class="table-right money-row"> {{Sub}} </span>
+        </div>
+        <div class="table-row-money">
+            <span class="table-left "> Discount: </span>
+            <span class="table-right money-row"> {{Disc}} </span>
+        </div>
+        <div class="table-row-money">
+            <span class="table-left "> Total: </span>
+            <span class="table-right money-row"> {{Total}} </span>
+        </div>
+    </div>
+  </body>
+</html>

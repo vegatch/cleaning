@@ -5,6 +5,10 @@ import SelectItem from '../Select.jsx';
 import Radio from "../RadioButton.jsx";
 import Extra from '../Extra.jsx'
 
+import Quote from '../utilities/Quote.jsx';
+import quoteId from '../utilities/IgGenerator.jsx'
+import DateToClean from '../utilities/DateConversion.jsx'
+
 const Booking = () =>{
   
 
@@ -40,12 +44,19 @@ const Booking = () =>{
           numFan: '',
           numBlind: '',
           numLaundry: '',
-          // dateErr:null,
+          cleanSubTotal:'',
+          cleanDiscount:'',
+          cleanTotal:'',
+          cleanId:'',
+          requestDate:'',
+          cleanDate:'',
+
              
       }
     const [formData, setFormData] = React.useState(initialState)
     const [formError, setFormError] = React.useState(initialState)
     const [redirect, setRedirect] = React.useState(false);
+    const [serverError, setServerError] = React.useState(false);
 
     const personalArray = [
         {
@@ -292,9 +303,12 @@ const Booking = () =>{
   }
   if (formData.zipcode === "") {
     errMsg.zipcode ='zipcode is required'
-  }else if(formData.zipcode.length >5 || formData.lastname.length <5 ){
+  }else if(formData.zipcode.length !== 5){
     errMsg.zipcode ='zipcode doesn\'t match'
+  }else if(isNaN(formData.zipcode)){
+    errMsg.zipcode ='only numbers acccepted'
   }
+
   if (formData.selectCleanType === "") {
     errMsg.selectCleanType ='cleaning type is required'
   }
@@ -354,12 +368,23 @@ const Booking = () =>{
         
       const isChecked = (value) => formData.cleaningFrequency === value;     
           
-          
       
       
-    useEffect(() =>{
+      useEffect(() =>{
+        
+        const  {subTotal, discount, total} = Quote(formData)
+        formData.cleanId = quoteId(4)
 
-      
+        const {cleanDate, quoteDate} = DateToClean(formData.cleaningDate)
+  
+        // console.log('sub:',subTotal, 'Off:',discount, 'tot:',total, 'ID', formData.cleanId, DateToClean(formData.cleaningDate))  
+        // console.log('FormSub',formData.cleanSubTotal, 'FormOff',formData.cleanDiscount, 'FormTot',formData.cleanTotal)  
+        formData.cleanSubTotal = subTotal
+        formData.cleanDiscount = (discount === 100 ? 1: 100 - (discount * 100))
+        formData.cleanTotal = total
+        formData.requestDate = quoteDate
+        formData.cleanDate = cleanDate
+
 
     },[formData])
     
@@ -368,7 +393,7 @@ const Booking = () =>{
         
         const myUrl = "http://localhost:3001/quote";
         setFormError(formValidation())
-        if(Object.keys(formValidation()).length === 0){
+        if(Object.keys(formValidation()).length === 0){       
            
           
      // -----------START------------------
@@ -383,15 +408,18 @@ const Booking = () =>{
           .then((res) => res.json())
           .then(async (res) => {
             const resData = await res;
-            if (resData.status === "success") {            
-              // window.location.href ="/SuccessPage";
-              // history.push('/SuccessPage')
+            if (resData.status === "success") {           
+              
               setRedirect(true)
-            } else if (resData.status === "fail") {
+            } else {
               throw new Error(`HTTP error! status: ${resData.status}`);
             }
           })
-          .catch((error) => { console.log(error)})
+          .catch((error) => { 
+            setServerError(error)
+            console.log('name:', error.name, 'message:', error.message)
+            console.log('server',serverError)
+          })
           .finally(() => {
             console.log(initialState);
           })
@@ -404,6 +432,7 @@ const Booking = () =>{
           <div>
             <form noValidate onSubmit={handleSubmit}>
               <div className="errorContainer">
+              {serverError.message && <p>{serverError.message}</p>}
                 <p> {formError.firstname} </p>
                 <p> {formError.middlename} </p>
                 <p> {formError.lastname} </p>

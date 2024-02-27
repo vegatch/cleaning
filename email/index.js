@@ -1,8 +1,11 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
+var hbs = require('nodemailer-express-handlebars');
+const path = require('path')
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
+
 
 // middleware
 app.use(express.json());
@@ -18,6 +21,18 @@ let transporter = nodemailer.createTransport({
     pass: process.env.APPWORD,
   },
 });
+
+const handlebarOptions = {
+  viewEngine: {
+    extName: ".handlebars",
+    partialsDir: path.resolve('./container'),
+    defaultLayout: false,
+  },
+  viewPath: path.resolve('./container'),
+  extName: ".handlebars",
+}
+
+transporter.use('compile', hbs(handlebarOptions));
 
 transporter.verify((err, success) => {
  err
@@ -138,7 +153,7 @@ let message = {
   cleaningType: `${req.body.formData.selectCleanTypeLabel} `,
   Frequency: `${req.body.formData.cleaningFrequencyLabel} `, 
   Oven:  `  ${req.body.formData.oven} `,
-  numOven: `  ${req.body.formData.numOven} `,
+  // numOven: `  ${req.body.formData.numOven} `,
   numOven: `  ${numOfOven} `,
   Fridge:  `  ${req.body.formData.numFridge} `,
   numFridge:  `  ${numOfFridge} `,
@@ -152,6 +167,12 @@ let message = {
   numBlind:  `  ${numOfBlind} `,
   CleaningDate:  `  ${req.body.formData.cleaningDate} `,
   CleaningTime:  `   ${time} `,
+  SubTotal: `  ${req.body.formData.cleanSubTotal} `,
+  Discount: `  ${req.body.formData.cleanDiscount} `,
+  Total: `  ${req.body.formData.cleanTotal} `,
+  QuoteId: `  ${req.body.formData.cleanId} `,
+  QuoteDate: `  ${req.body.formData.requestDate} `,
+  CleanDate: `  ${req.body.formData.cleanDate} `,
 //   html: `${req.body.messageState.message}`
 };
 
@@ -159,30 +180,41 @@ let message = {
 
 let mailOptions = {
    from: `${req.body.formData.email}`,
-   to: process.env.EMAIL,
-   cc:'vegatch1@gmail.com', 
+  //  to: process.env.EMAIL,
+  //  cc:'vegatch1@gmail.com', 
+  to: 'vegatch1@gmail.com', 
   //  cc:'vegatch1@gmail.com, migaellepithon@gmail.com',
    subject: `Message of ${req.body.formData.firstname} ${req.body.formData.lastname}from Benskya's Booking form`,
   //  text: `<p>${message.text}<p/>  <p>${message.phone}<p/>`,
-   html:`
-        <h1><strong> Booking  details </strong></h1>
-        <p>Name: ${message.from}</p>
-        <p>Phone: ${message.phone}</p>      
-        <p>Address: ${message.address}</p>   
-        <p># of bedhroom: <strong>${message.bedroom}</strong></p>
-        <p># of bathroom: <strong>${message.bathroom}</strong></p>
-        <p>Type of cleaning requested: <strong>${message.cleaningType}</strong></p>         
-        <p>Frequency: <strong>${message.Frequency}<strong></p>
-        <h2><strong>Additional services requested</strong></h2>
-        <p>Oven: <strongp>${message.numOven ===''? 0 : message.numOven}</strong></p>
-        <p>Fridge: <strongp>${message.numFridge}</strong></p>
-        <p>Window: <strongp>${message.numWindow}</strong></p>
-        <p>Ceiling Fan: <strongp>${message.numFan}</strong></p>
-        <p>Load of laundry: <strongp>${message.numLaundry}</strong></p>
-        <p>Blind: <strongp>${message.numBlind}</strong></p>
-        <p> Projected cleaning date: <strongp>${message.CleaningDate}</strong></p>
-        <p> Projected cleaning time: <strongp>${message.CleaningTime}</strong></p>
-         `,
+  template: 'htmlEmail',
+  context: {
+    
+    title: 'Book Now: cleaning spots are filled quickly & avoid long wait',
+    navigation: 'Benskya',
+    navigationR: 'Booking',
+    subTitle:'Book your cleaning now and enjoy a cleaner space. ',
+    customer_greet: 'Specially quoted for:',
+    Name: `${message.from}`,
+    Address: `${message.address}`,
+    Phone:`${message.phone}`,
+    Quote_id : `${message.QuoteId}`,
+    Request_Date: ` ${message.QuoteDate}`,
+    Clean_date: ` ${message.CleanDate}`,
+    CleanDesc: ` ${message.cleaningType} :`,
+    Bedroom_num: `${message.bedroom}`,
+    Bathroom_num: `${message.bathroom}`,
+    Oven_num:`${message.numOven}`,
+    Fridge_num:`${message.numFridge}`,
+    Window_num:`${message.numWindow}`,
+    Fan_num:`${message.numFan}`,
+    blind_num:`${message.numBlind}`,
+    Laundry_num:`${message.numLaundry}`,
+    Sub:`$ ${message.SubTotal}`,
+    Disc:` - ${message.Discount} %`,
+    Total:`$ ${message.Total}`,
+
+  }
+   
 };
 
  transporter.sendMail(mailOptions, function (err, data) {
