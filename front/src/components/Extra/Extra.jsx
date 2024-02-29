@@ -1,7 +1,7 @@
 import { React} from "react";
 // import { useState,useEffect, React } from "react";
 // import ExtraNum from './ExtraNum'
-import '../CSS/extra.css'
+import './extra.css'
 
 
 const Extra = ({label, price, name, id, title, myLabel, value, tile, onChange, ...props}) =>{
@@ -17,30 +17,30 @@ const Extra = ({label, price, name, id, title, myLabel, value, tile, onChange, .
                     type="checkbox"/>
                     {label}
                 </label>
+                <span class="checkmark"></span>
             </div> 
-            {value === true ? 
+            {
+            value === true ? 
             <div className='right-container'>
                 <div>
-                    <label htmlFor={title}>{myLabel}</label>
+                    <label htmlFor={title}>{}</label>
                 </div>
                 <div className='extra-container'> 
                     <select 
                         onChange={onChange}
                         name={title}>
-                        <option value='0' hidden> Select an option</option>
+                        <option value='0' hidden> Select a value</option>
                         <option value='1'>One</option>
                         <option value='2'>Two</option>
                         <option value='3'>Three</option>
                         <option value='4'>Four</option>
                         <option value='5'>Five</option>
                         <option value='6'>Six</option>
-                    </select>
-                    
-                </div>            
-            
-        </div>
+                    </select>                    
+                </div>           
+            </div>
             :
-         null   
+                 null   
             }
              
         </div>

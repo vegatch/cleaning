@@ -179,12 +179,12 @@ let message = {
 
 
 let mailOptions = {
-   from: `${req.body.formData.email}`,
+  //  from: `${req.body.formData.email}`,
+   from: process.env.EMAIL,
+   to: `${req.body.formData.email}`,
   //  to: process.env.EMAIL,
-  //  cc:'vegatch1@gmail.com', 
-  to: 'vegatch1@gmail.com', 
-  //  cc:'vegatch1@gmail.com, migaellepithon@gmail.com',
-   subject: `Message of ${req.body.formData.firstname} ${req.body.formData.lastname}from Benskya's Booking form`,
+   cc:'vegatch1@gmail.com, migaellepithon@gmail.com',
+   subject: `Message of ${req.body.formData.firstname} ${req.body.formData.lastname} from Benskya's Booking form`,
   //  text: `<p>${message.text}<p/>  <p>${message.phone}<p/>`,
   template: 'htmlEmail',
   context: {
@@ -197,6 +197,7 @@ let mailOptions = {
     Name: `${message.from}`,
     Address: `${message.address}`,
     Phone:`${message.phone}`,
+    Cust_email: `${message.email}`,
     Quote_id : `${message.QuoteId}`,
     Request_Date: ` ${message.QuoteDate}`,
     Clean_date: ` ${message.CleanDate}`,

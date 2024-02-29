@@ -1,0 +1,68 @@
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  .checkbox-container{
+      box-sizing: border-box;
+  }
+
+  .left-container{
+    display: block;
+    position: relative;
+    cursor: pointer;    
+}
+
+.left-container input{
+    height: 1rem;
+    width: 1rem;
+    
+    
+}
+
+.checkbox-container
+ {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;   
+    margin: .5rem 0;    
+    height: auto;
+}
+ 
+.checkbox-container,
+.right-container{
+    height: 2.3rem;
+}
+
+.right-container{    
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+
+}
+
+.right-container select{
+    width: 70%;
+}
+
+input[type=checkbox] { 
+    margin-right: .5rem;
+} 
+
+
+.extra-container select{
+    box-sizing: border-box;
+}
+
+
+.extra-container{
+    height: inherit;
+}
+
+
+
+

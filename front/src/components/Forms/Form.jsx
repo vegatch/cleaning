@@ -3,11 +3,22 @@ import { Navigate } from "react-router-dom";
 import FormInput from "../Input/Input";
 import SelectItem from '../Select.jsx';
 import Radio from "../RadioButton.jsx";
-import Extra from '../Extra.jsx'
+import Extra from '../Extra/Extra.jsx'
 
 import Quote from '../utilities/Quote.jsx';
 import quoteId from '../utilities/IgGenerator.jsx'
 import DateToClean from '../utilities/DateConversion.jsx'
+import './form.css'
+
+
+// const headForm = 'Get your quote or booking today';
+
+// const headFormDesc = `  
+//                     The process is pretty straightforward. Fill out the form and 
+//                     click the Get your quote button to have your personalized quote in the
+//                     e-mail provided in the form in seconds. Or click the Book Now button 
+//                     to book your cleaning preference. `;
+
 
 const Booking = () =>{
   
@@ -428,229 +439,241 @@ const Booking = () =>{
         
       }
     return(
-        <div> 
-          <div>
-            <form noValidate onSubmit={handleSubmit}>
-              <div className="errorContainer">
-              {serverError.message && <p>{serverError.message}</p>}
-                <p> {formError.firstname} </p>
-                <p> {formError.middlename} </p>
-                <p> {formError.lastname} </p>
-                <p> {formError.email} </p>
-                <p> {formError.phonenumber} </p>
-                <p> {formError.streetAddress} </p>
-                <p> {formError.city} </p>
-                <p> {formError.zipcode} </p>
-                <p> {formError.selectBedNum} </p>
-                <p> {formError.selectBathNum} </p>
-                <p> {formError.cleaningDate} </p>
-                <p> {formError.selectCleanTime} </p>
+      <div className="booking-page">
+         <div className="booking-container">
+            <div className="booking-page-left">
+              
+              <form noValidate onSubmit={handleSubmit}>
+              {/* I may remove the heaer from here */}  
+                {/* <div className="header-content">
+                  <div className='formHeader'>
+                  <h1>{headForm}</h1>
+                  <h2>{headFormDesc}</h2>
+                  </div>                  
+                </div> */}
+              {/* I may remove the heaer from here */}
+                <div className="errorContainer">
+                {serverError.message && <p>{serverError.message}</p>}
+                  <p> {formError.firstname} </p>
+                  <p> {formError.middlename} </p>
+                  <p> {formError.lastname} </p>
+                  <p> {formError.email} </p>
+                  <p> {formError.phonenumber} </p>
+                  <p> {formError.streetAddress} </p>
+                  <p> {formError.city} </p>
+                  <p> {formError.zipcode} </p>
+                  <p> {formError.selectBedNum} </p>
+                  <p> {formError.selectBathNum} </p>
+                  <p> {formError.cleaningDate} </p>
+                  <p> {formError.selectCleanTime} </p>
 
+                </div>
+              <h3>Personal Information:</h3>  
+              <div>
+                  {personalArray.map((input) => (
+                  <FormInput
+                    key={input.id}
+                    {...input}
+                    type={input.type}
+                    value={formData[input.name]}
+                    onChange={handleFormChange}
+                  />
+                ))}
               </div>
-            <div>
-                {personalArray.map((input) => (
+              <div>
+                <h3>Property Information:</h3>    
+                <SelectItem
+                label="# of bedroom"
+                options={[
+                  {label: "One bedroom", value: 1},
+                  {label: "Two bedrooms", value: 2},
+                  {label: "Three bedrooms", value: 3},
+                  {label: "Four bedrooms", value: 4},
+                  {label: "Five bedrooms", value: 5},
+              ]}
+              value={FormData}
+              name='selectBedNum'
+              id='selectBedNum'
+              required={true}
+              onChange={handleFormChange}        
+            /> 
+
+            <SelectItem
+              label="# of bathroom"
+              options={[
+                {label: "One bathroom", value: 1},
+                {label: "Two bathrooms", value: 2},
+                {label: "Three bathrooms", value: 3},
+                {label: "Four bathrooms", value: 4},
+                {label: "Five bathrooms", value: 5},
+              ]}
+              value={FormData}
+              name='selectBathNum'
+              id='selectBathNum'
+              required={true}
+              onChange={handleFormChange} 
+            />        
+          </div>
+          <div>
+            <h4>Address of the place to be cleaned:</h4>
+              {addressArray.map((input) => (
                 <FormInput
                   key={input.id}
                   {...input}
-                  type={input.type}
-                  value={formData[input.name]}
+                  value={FormData[input.name]}
                   onChange={handleFormChange}
                 />
               ))}
-            </div>
-            <div>
-              <h3>Property Information:</h3>    
-              <SelectItem
-              label="# of bedroom"
-              options={[
-                {label: "One bedroom", value: 1},
-                {label: "Two bedrooms", value: 2},
-                {label: "Three bedrooms", value: 3},
-                {label: "Four bedrooms", value: 4},
-                {label: "Five bedrooms", value: 5},
-            ]}
-            value={FormData}
-            name='selectBedNum'
-            id='selectBedNum'
-            required={true}
-            onChange={handleFormChange}        
-          /> 
-
+            
           <SelectItem
-            label="# of bathroom"
-            options={[
-              {label: "One bathroom", value: 1},
-              {label: "Two bathrooms", value: 2},
-              {label: "Three bathrooms", value: 3},
-              {label: "Four bathrooms", value: 4},
-              {label: "Five bathrooms", value: 5},
-            ]}
-            value={FormData}
-            name='selectBathNum'
-            id='selectBathNum'
-            required={true}
-            onChange={handleFormChange} 
-          />        
-        </div>
-        <div>
-          <h4>Address of the place to be cleaned:</h4>
-            {addressArray.map((input) => (
-              <FormInput
-                key={input.id}
-                {...input}
-                value={FormData[input.name]}
-                onChange={handleFormChange}
-              />
-            ))}
-          
-        <SelectItem
-            label="State"
-            options={[
-              {label: "Indiana", value: "IN"},            
-            ]}
-            value={FormData}
-            name='stateAddress'
-            id='stateAddress'
-            onChange={handleFormChange}       
-        />
-        </div>
-        <div>      
-            <div className='form-section-header'>
-              <h3>Cleaning option and frequency</h3>
-            </div>         
-            <SelectItem
-            label="Cleaning type"
-            options={[
-              {label: "Standard cleaning", value: 1},
-              {label: "Deep cleaning", value: 2},
-              {label: "Move In / Move Out", value: 3},
-              {label: "Post construction", value: 4},
-              {label: "AirBnB", value: 5},
-            ]}
-            value={formData}
-            name='selectCleanType'
-            id='selectCleanType'
-            required={true}
-            onChange={handleFormChange} 
-          />  
-          
-        </div>
-        <div  >
-            <h4>Select your cleaning frequency</h4>  
+              label="State"
+              options={[
+                {label: "Indiana", value: "IN"},            
+              ]}
+              value={FormData}
+              name='stateAddress'
+              id='stateAddress'
+              onChange={handleFormChange}       
+          />
+          </div>
+          <div>      
+              <div className='form-section-header'>
+                <h3>Cleaning option and frequency</h3>
+              </div>         
+              <SelectItem
+              label="Cleaning type"
+              options={[
+                {label: "Standard cleaning", value: 1},
+                {label: "Deep cleaning", value: 2},
+                {label: "Move In / Move Out", value: 3},
+                {label: "Post construction", value: 4},
+                {label: "AirBnB", value: 5},
+              ]}
+              value={formData}
+              name='selectCleanType'
+              id='selectCleanType'
+              required={true}
+              onChange={handleFormChange} 
+            />  
+            
+          </div>
+          <div  >
+              <h4>Select your cleaning frequency</h4>  
 
-            {/* {radioElement.map((input) => (
-              <Radio
-                key={input.id}
-                {...input}
-                value={formData[input.name]}
-                required={true}
-                name={input.name}
-                text={input.label}
-                checked={input.checked}
-                id={input.id}
+              {/* {radioElement.map((input) => (
+                <Radio
+                  key={input.id}
+                  {...input}
+                  value={formData[input.name]}
+                  required={true}
+                  name={input.name}
+                  text={input.label}
+                  checked={input.checked}
+                  id={input.id}
+                  onChange={handleFormChange}
+                />
+              ))} */}
+
+              <Radio          
+                id="radio1"
+                name="cleaningFrequency"
+                value="0.7"
+                text="Weekly clean (-30%) "
                 onChange={handleFormChange}
+                checked={isChecked("0.7")}
               />
-            ))} */}
+            
+            <Radio          
+                id="radio2"
+                name="cleaningFrequency"
+                value="0.75"
+                text="Biweekly clean (-25%) "
+                onChange={handleFormChange}
+                checked={isChecked("0.75")}
+            />
 
             <Radio          
-              id="radio1"
-              name="cleaningFrequency"
-              value="0.7"
-              text="Weekly clean (-30%) "
-              onChange={handleFormChange}
-              checked={isChecked("0.7")}
+                id="radio3"
+                name="cleaningFrequency"
+                value="0.8"
+                text="Monthly clean (-20%) "
+                onChange={handleFormChange}
+                checked={isChecked("0.8")}
             />
-          
-          <Radio          
-              id="radio2"
-              name="cleaningFrequency"
-              value="0.75"
-              text="Biweekly clean (-25%) "
-              onChange={handleFormChange}
-              checked={isChecked("0.75")}
-          />
-
-          <Radio          
-              id="radio3"
-              name="cleaningFrequency"
-              value="0.8"
-              text="Monthly clean (-20%) "
-              onChange={handleFormChange}
-              checked={isChecked("0.8")}
-          />
-          <Radio          
-              id="radio4"
-              name="cleaningFrequency"
-              value="1"
-              text="One time clean  "
-              onChange={handleFormChange}
-              checked={isChecked("1")}
-          />
-
-
-          </div>  
-          <div>
-            <div>
-              <h3>Extra services</h3>
-            </div>
-            <div >
-                <div>
-                    {extraItem.map((input) => (
-                      <Extra
-                        key={input.id}
-                        {...input}
-                        price={input.price}
-                        title={input.myName}
-                        myLabel={input.myLabel}
-                        value={formData[input.name]}
-                        onChange={handleFormChange}
-                      />
-                    ))}
-                </div>
+            <Radio          
+                id="radio4"
+                name="cleaningFrequency"
+                value="1"
+                text="One time clean  "
+                onChange={handleFormChange}
+                checked={isChecked("1")}
+            />
 
 
             </div>  
+            <div>
+              <div>
+                <h3>Extra services</h3>
+              </div>
+              <div >
+                  <div>
+                      {extraItem.map((input) => (
+                        <Extra
+                          key={input.id}
+                          {...input}
+                          price={input.price}
+                          title={input.myName}
+                          myLabel={input.myLabel}
+                          value={formData[input.name]}
+                          onChange={handleFormChange}
+                        />
+                      ))}
+                  </div>
 
-            
-          </div>
-          <div>
-            <h3>Schedule your cleaning tine</h3>
-          {scheduleArray.map((input) => (
-              <FormInput
-                key={input.id}
-                {...input}
-                value={formData[input.name]}
-                onChange={handleFormChange}
+
+              </div>  
+
               
-              />
-              ))}
+            </div>
+            <div>
+              <h3>Schedule your cleaning tine</h3>
+            {scheduleArray.map((input) => (
+                <FormInput
+                  key={input.id}
+                  {...input}
+                  value={formData[input.name]}
+                  onChange={handleFormChange}
+                
+                />
+                ))}
 
-            <SelectItem
-            label="Time"
-            options={[
-              {label: "8:00 AM", value: "1"},   
-              {label: "11:00 AM", value: "2"},  
-              {label: "2:00 PM", value: "3"},           
-            ]}
-            value={formData}
-            name='selectCleanTime'
-            id='selectCleanTime'
-            onChange={handleFormChange}       
-        />
-          </div>
+              <SelectItem
+              label="Time"
+              options={[
+                {label: "8:00 AM", value: "1"},   
+                {label: "11:00 AM", value: "2"},  
+                {label: "2:00 PM", value: "3"},           
+              ]}
+              value={formData}
+              name='selectCleanTime'
+              id='selectCleanTime'
+              onChange={handleFormChange}       
+          />
+            </div>
 
-              <button>Submit</button>
-            </form>
-            {
-            redirect ? (
-                <Navigate replace to="/SuccessPage" />
-              ) : null
-            }
-          </div> 
-          <div>
-            <h1>Right container</h1>
-          </div>        
-        </div>
+                <button>Submit</button>
+              </form>
+              {
+              redirect ? (
+                  <Navigate replace to="/SuccessPage" />
+                ) : null
+              }
+            </div> 
+            <div className="booking-page-right">
+              <h1>Right container</h1>
+            </div>
+         </div>
+      </div>
     )
 }
 

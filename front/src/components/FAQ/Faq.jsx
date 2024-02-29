@@ -1,4 +1,5 @@
 import React, {useEffect}from "react";
+import Path from '../Path/Path.jsx'
 import './faq.css'
 
 // const Faq = ({  index, open, question, answer}) => {
@@ -242,147 +243,162 @@ const Faq = () => {
 
     return (
         <div className="section-container">  
-            <div className="faq-wrapper">
-                
-                <div>
-                    <div className="categ-container">
-                        <label  >  
-                        <input type="checkbox"  className="btn-faq" onClick={toggleService}
-                            onChange={handleCheck}
-                        />                            
-                            Service  </label>
-                            <div onClick={toggleService}>{isChecked && category ==='service' ? '-' : '+'}</div>
-                    </div>    
-                    {
-                       category==='service' &&
-                        faqCollection.service.map((faq) =>{
-                        return (
-                            <div key={faq.answer} className="questionAnswer-wrapper">
-                                <li key ={faq.answer}>
-                                    <p>{faq.question}</p>
-                                    <p>{faq.answer}</p>
-                                </li> 
-                            </div>
-                            
-                        )
-                    })
+            <div className="faq-outer-container">
+                <div className="faq-wrapper">
                     
-                    
-                }            
-                    
-                </div>
-                <div>
-                <div className="categ-container">
-                        <label  >  
-                        <input type="checkbox"  className="btn-faq" onClick={toggleCleaner}
-                            onChange={handleCheck}
-                        />                            
-                            Cleaner  </label>
-                        <div onClick={toggleCleaner}>{isChecked && category ==='cleaner' ? '-' : '+'}</div>
+                    <div>
+                        <div className="categ-container first-row">
+                            <label>  
+                                <input type="checkbox"  className="btn-faq" onClick={toggleService}
+                                    onChange={handleCheck} />                            
+                                Service  
+                            </label>
+                                <div onClick={toggleService}>{isChecked && category ==='service' ? '-' : '+'}</div>
+                        </div>    
+                        <div className="faq-answer-container">
+                        {
+                        category==='service' &&
+                            faqCollection.service.map((faq) =>{
+                            return (
+                                <div key={faq.answer} className="questionAnswer-wrapper">
+                                    <li key ={faq.answer}>
+                                        <p>{faq.question}</p>
+                                        <p>{faq.answer}</p>
+                                    </li> 
+                                </div>
+                                
+                            )
+                        })
+                        
+                        
+                    }
+                        
+                        </div>                   
                     </div>
-                    
-                    {                           
-                         category ==='cleaner' &&
-                    faqCollection.cleaner.map((faq, index) =>{
-                        return (
-                            <div key={faq.answer} className="questionAnswer-wrapper">
-                                <li key ={faq.answer}>
-                                    <p>{faq.question}</p>
-                                    <p>{faq.answer}</p>
-                                </li> 
-                            </div>                            
-                        )
-                    })
-                    
-                }            
-                    
-                </div>
-                <div>
-                    <div className="categ-container">
-                        <label  >  
-                        <input type="checkbox"  className="btn-faq" onClick={toggleBooking}
-                            onChange={handleCheck}
-                        />                            
-                            Booking 
-                        </label>
-                        <div onClick={toggleBooking}>{isChecked && category ==='booking' ? '-' : '+'}</div>                        
-                    </div>                    
-                    {                           
-                         category ==='booking' &&
-                    faqCollection.booking.map((faq, index) =>{
-                        return (
-                            
-                            <div key={faq.answer} className="questionAnswer-wrapper">
-                                <li key ={faq.answer}>
-                                    <p>{faq.question}</p>
-                                    <p>{faq.answer}</p>
-                                </li> 
-                            </div>
-                            
-                        )
-                    })
-                    
-                }            
-                    
-                </div>
-                <div>
 
-                    <div className="categ-container">
-                        <label  >  
-                        <input type="checkbox"  className="btn-faq" onClick={togglePrice}
-                            onChange={handleCheck}
-                        />                            
-                            Pricing 
-                        </label>
-                        <div onClick={togglePrice}>{isChecked && category ==='price' ? '-' : '+'}</div>                        
+                    <div>
+                        <div className="categ-container">
+                                <label >  
+                                <input type="checkbox"  className="btn-faq" onClick={toggleCleaner}
+                                    onChange={handleCheck} />                            
+                                    Cleaner                            
+                                </label>
+                                <div onClick={toggleCleaner}>{isChecked && category ==='cleaner' ? '-' : '+'}</div>
+                        </div>
+                        <div className="faq-answer-container">
+                        {                           
+                            category ==='cleaner' &&
+                            faqCollection.cleaner.map((faq, index) =>{
+                                return (
+                                <div key={faq.answer} className="questionAnswer-wrapper">
+                                    <li key ={faq.answer}>
+                                        <p>{faq.question}</p>
+                                        <p>{faq.answer}</p>
+                                    </li> 
+                                </div>                            
+                                )
+                            })
+                        
+                        }   
+                        </div>                    
                     </div>
-                    
-                    {                           
-                         category ==='price' &&
-                    faqCollection.price.map((faq, index) =>{
-                        return (
-                            <div key={faq.answer} className="questionAnswer-wrapper">
-                                <li key ={faq.answer}>
-                                    <p>{faq.question}</p>
-                                    <p>{faq.answer}</p>
-                                </li> 
-                            </div>
-                        )
-                    })
-                    
-                }            
-                    
-                </div>
-                <div>
-
-                    <div className="categ-container referral">
-                        <label  >  
-                        <input type="checkbox"  className="btn-faq" onClick={toggleReferral}
-                            onChange={handleCheck}
-                        />                            
-                            Referral 
-                        </label>
-                        <div onClick={toggleReferral}>{isChecked && category ==='referral' ? '-' : '+'}</div>                        
+                    <div>
+                        <div className="categ-container">
+                            <label  >  
+                                <input type="checkbox"  className="btn-faq" onClick={toggleBooking}
+                                onChange={handleCheck} />                            
+                                Booking 
+                            </label>
+                            <div onClick={toggleBooking}>{isChecked && category ==='booking' ? '-' : '+'}</div>                        
+                        </div>
+                        <div className="faq-answer-container">
+                        {                           
+                            category ==='booking' &&
+                            faqCollection.booking.map((faq, index) =>{
+                                return (                                
+                                    <div key={faq.answer} className="questionAnswer-wrapper">
+                                        <li key ={faq.answer}>
+                                            <p>{faq.question}</p>
+                                            <p>{faq.answer}</p>
+                                        </li> 
+                                    </div>                                
+                                )
+                            })
+                        
+                        }   
+                        </div>                    
+                                
+                        
                     </div>
-                    {                           
-                         category ==='referral' &&
-                    faqCollection.referral.map((faq, index) =>{
-                        return (
-                            <div key={faq.answer} className="questionAnswer-wrapper">
-                                <li key ={faq.answer}>
-                                    <p>{faq.question}</p>
-                                    <p>{faq.answer}</p>
-                                </li> 
-                            </div>
-                        )
-                    })
+                    <div>
+                        <div className="categ-container">
+                            <label  >  
+                            <input type="checkbox"  className="btn-faq" onClick={togglePrice}
+                                onChange={handleCheck} />                            
+                                Pricing 
+                            </label>
+                            <div onClick={togglePrice}>{isChecked && category ==='price' ? '-' : '+'}</div>                        
+                        </div>
+                        <div className="faq-answer-container">
+                            {                           
+                                category ==='price' &&
+                                faqCollection.price.map((faq, index) =>{
+                                    return (
+                                        <div key={faq.answer} className="questionAnswer-wrapper">
+                                            <li key ={faq.answer}>
+                                                <p>{faq.question}</p>
+                                                <p>{faq.answer}</p>
+                                            </li> 
+                                        </div>
+                                    )
+                                })
+                            
+                            }
+                        </div>
+                        
+                                    
+                        
+                    </div>
+                    <div>
+                        <div className="categ-container referral">
+                            <label  >  
+                                <input type="checkbox"  className="btn-faq" onClick={toggleReferral}
+                                onChange={handleCheck} />                            
+                                Referral 
+                            </label>
+                            <div onClick={toggleReferral}>{isChecked && category ==='referral' ? '-' : '+'}</div>                        
+                        </div>
+                        <div className="faq-answer-container">
+                            {                           
+                                category ==='referral' &&
+                                faqCollection.referral.map((faq, index) =>{
+                                    return (
+                                        <div key={faq.answer} className="questionAnswer-wrapper">
+                                            <li key ={faq.answer}>
+                                                <p>{faq.question}</p>
+                                                <p>{faq.answer}</p>
+                                            </li> 
+                                        </div>
+                                    )
+                                })
+                            
+                            }   
+                        </div>
+                                
+                        
+                    </div> 
                     
-                }            
-                    
-                </div>
                 
-            
-            </div>
+                </div>
+                <div className="more-help-container">
+                        <p> Do you still have a question?</p>
+                        <p> We have the answer. Talk to us now</p>
+                        <div className="box-to-contact">
+                        <Path goToPage='/Contact' labelForLink='Send your question'/>
+                            <p>And receive answers right away</p>
+                        </div>
+                </div>
+            </div>            
 
         </div>
         

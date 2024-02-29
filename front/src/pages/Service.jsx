@@ -1,7 +1,7 @@
 import React from "react";
 import ServOffered from '../components/Service/ServOffered.jsx'
 import cleaner from '../pics/barbara.png'
-import Booking from "../components/Forms/Form.jsx";
+// import Booking from "../components/Forms/Form.jsx";
 
 const Service = () => {
     const offer = [
@@ -79,7 +79,7 @@ const Service = () => {
             }
             <ServOffered />
 
-            <Booking />
+            {/* <Booking /> */}
         </div>
         
         )

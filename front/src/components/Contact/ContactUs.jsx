@@ -145,7 +145,7 @@ const ContactUs = () => {
                     <ImLocation/> <p>Indianapolis, IN</p>
                 </div>
             </div>
-            <div>
+            <div className="form-container">
               <form  onSubmit={handleSubmit} className="contact_right_container">
                 <div>
                 

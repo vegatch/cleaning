@@ -24,7 +24,7 @@ body{
     background-color: var(--bg-color-pages);
     font-family: 'Roboto', sans-serif;    
     /* line-height: 6rem; */
-    font-size: calc(16px + 0.390625vw);
+    font-size: 1rem;
     margin: 0;
     overflow:auto
     

@@ -1,0 +1,62 @@
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+.booking-container{
+    margin: 0 auto;
+    max-width: 50rem;
+    /* padding: 1rem .5rem; */
+}
+
+.header-booking{
+    background-color: navy;
+    padding-block: 8rem;
+    color: white;
+    
+
+}
+
+
+.booking-container form{
+    width: 100%;
+    border: .1rem solid var(--darkgray-line);
+    box-shadow:  0 0 .4rem var(--darkgray-line);
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    position: relative;
+    top:-7rem;
+    background-color: white;
+    
+}
+
+.booking-container form input[type='text']
+,.booking-container form input[type='email']
+,.booking-container form input[type='date']
+,.booking-container form input[type='number']
+,.booking-container form select{
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-top: .5rem;
+    padding: .6rem;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 .2rem  navy;
+    border-radius: .5rem;
+}
+
+
+
+
+form button{
+    width: 100%;
+    outline: none;
+    border: none;
+    border-radius: 1rem;
+    padding-block: 1rem;
+    color: white;
+    background-color: var(--bg-blue);
+    margin-block: 1rem;
+}

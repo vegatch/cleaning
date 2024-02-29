@@ -6,9 +6,45 @@
 
 .clean-list li{
     list-style: none;
+    line-height: 2.5rem;
 }
 
 .clean-list li::before{
     content: '\2713';
     margin-right: 1rem;
+    background-color: var(--bg-blue);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    padding: .3rem;
+    color: white;
+    font-weight: 900;
+    
 }
+
+.cleaning-option-container > div{
+    flex: 1;
+    border: .1rem solid var(--bg-blue);
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width:870px){   
+
+    .cleaning-option-container{
+        display: flex;
+        margin: 0 auto;
+        gap: 1rem;
+        max-width: 60rem;
+        margin-block: 3rem;
+    }
+
+    .cleaning-option-container > div:nth-child(2){
+        background-color: aqua;
+        position: relative;
+        top: 0rem;
+        border: .3rem solid var(--bg-blue);
+        
+    }
+ }

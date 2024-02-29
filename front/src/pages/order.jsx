@@ -3,7 +3,7 @@ import {useState, useEffect, React} from 'react';
 // import FormInput from '../components/Input.jsx';
 import FormInput from '../components/Input/Input.jsx';
 import SelectItem from '../components/Select.jsx';
-import Extra from '../components/Extra.jsx'
+import Extra from '../components/Extra/Extra.jsx'
 import Radio from '../components/RadioButton.jsx'
 // import FormValidation from '../components/utilities/Validation.jsx';
 // import fetchPost from '../components/utilities/ApiCall.jsx';
