@@ -7,7 +7,7 @@ const Booking = () => {
     return (
         <div className="page-container">
             <div className="header-booking">
-                <h1> Book now</h1>
+                <h1> Book me now</h1>
                 {/* <img src={picture} alt='fyfyfgyu'/> */}
             </div>            
             <Form />
