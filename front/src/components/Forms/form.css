@@ -60,3 +60,8 @@ form button{
     background-color: var(--bg-blue);
     margin-block: 1rem;
 }
+
+
+form .errorContainer{
+    color: red;
+}

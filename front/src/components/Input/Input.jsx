@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-// import './input.css'
+import React  from "react";
+// import handleValidation from '../utilities/Validation.jsx'
+import './input.css'
 
 const Input = ({ id, label, onChange, type, required, ...inputProps }) => {
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = React.useState(false);
 
   const handleFocused = () => {
     setFocused(true);

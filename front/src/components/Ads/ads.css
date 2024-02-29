@@ -24,27 +24,66 @@
 
 .cleaning-option-container > div{
     flex: 1;
-    border: .1rem solid var(--bg-blue);
+    border: none;
+    box-shadow: 0 0 .5rem white;
     padding: 1rem;
     border-radius: 1rem;
     margin-bottom: 1rem;
+    background-color: var(--bg-color-pages);
+    margin-block: 5rem;
 }
+
+/* .cleaning-option-container{
+    background-color: var(--bg-blue);
+} */
 
 @media screen and (min-width:870px){   
 
-    .cleaning-option-container{
-        display: flex;
+    /* .cleaning-option-container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
         margin: 0 auto;
-        gap: 1rem;
+        gap: 20rem;
         max-width: 60rem;
         margin-block: 3rem;
+        
+        
+    } */
+
+    /* .cleaning-option-container > div:nth-child(2){
+        background-color: aqua;
+        position: absolute;
+        top: 142.4rem;
+        border: .3rem solid var(--bg-blue);
+        height: 74rem;
+        left: 32rem;        
+    } */
+
+    .cleaning-option-container > div:nth-child(1){
+        width: fit-content;
+    }
+    .cleaning-option-container > div:nth-child(2){
+        margin: 0 auto;
+        width: fit-content;
+        padding-top: 1rem;
+        padding-bottom: 42rem;
+    }
+    .cleaning-option-container > div:nth-child(3){
+        float: right;
+        width: fit-content;
+        padding-bottom: 53.7rem;
     }
 
-    .cleaning-option-container > div:nth-child(2){
-        background-color: aqua;
-        position: relative;
-        top: 0rem;
-        border: .3rem solid var(--bg-blue);
-        
+    .cleaning-option-container{
+        display: flex;
+        align-items: center;
+        gap:1rem;
+        max-width: 60rem;
+        margin: 0 auto;
+        margin-block: 4rem;
+
     }
+
+    
  }

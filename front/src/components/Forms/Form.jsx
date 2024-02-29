@@ -8,6 +8,7 @@ import Extra from '../Extra/Extra.jsx'
 import Quote from '../utilities/Quote.jsx';
 import quoteId from '../utilities/IgGenerator.jsx'
 import DateToClean from '../utilities/DateConversion.jsx'
+
 import './form.css'
 
 
@@ -35,8 +36,8 @@ const Booking = () =>{
           city:'',
           stateAddress:'',
           zipcode:'',
-          selectBedNum: 0,
-          selectBathNum: 0,
+          selectBedNum: '',
+          selectBathNum: '',
           selectCleanType:"",
           selectCleanTypeLabel:'',
           cleaningFrequency:"",
@@ -272,66 +273,81 @@ const Booking = () =>{
         const errMsg = {}
         const validEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/ ;
         const phoneFormat = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+        const letterOnly = /[aA-zZ]/
 
         if (formData.firstname === "") {
             errMsg.firstname ='First name is required'
         }else if(formData.firstname.length > 30 || formData.firstname.length < 2){
           errMsg.firstname='Name maybe too short'          
+        }else if(!formData.firstname.match(letterOnly)){
+          errMsg.firstname='Alphatical character only expected'
         }
 
         if (formData.lastname === "") {
           errMsg.lastname ='Last name is required'
         }else if(formData.lastname.length > 30 || formData.lastname.length < 2){
           errMsg.lastname='Name maybe too short'          
+        }else if(!formData.firstname.match(letterOnly)){
+          errMsg.firstname='Alphatical character only expected'
         }
-      
-      if(formData.email === ''){
-        errMsg.email ='Email is required'
-        
-    }else if(!validEmail.test(formData.email)){
-      errMsg.email ='Email is incorrect'
-        
-    }
+          
+        if(formData.email === ''){
+            errMsg.email ='Email is required'
+            
+        }else if(!validEmail.test(formData.email)){
+          errMsg.email ='Email is incorrect'
+            
+        }
 
-    if(formData.phonenumber === ''){
-      errMsg.phonenumber ='Phone number is required'
-      
-  }else if(!phoneFormat.test(formData.phonenumber)){
-    errMsg.phonenumber =' Format 000-000-0000 expected'
-      
-  }
-  if (formData.streetAddress === "") {
-    errMsg.streetAddress ='address is required'
-  }
-  if (formData.city === "") {
-    errMsg.city ='city is required'
-  }
-  if (formData.selectBedNum === "0") {
-    errMsg.selectBedNum ='# bedroom is required'
-  }
-  if (formData.selectBathNum === "0") {
-    errMsg.selectBathNum ='# bathroom is required'
-  }
-  if (formData.zipcode === "") {
-    errMsg.zipcode ='zipcode is required'
-  }else if(formData.zipcode.length !== 5){
-    errMsg.zipcode ='zipcode doesn\'t match'
-  }else if(isNaN(formData.zipcode)){
-    errMsg.zipcode ='only numbers acccepted'
-  }
+        if(formData.phonenumber === ''){
+          errMsg.phonenumber ='Phone number is required'
+          
+        }else if(!phoneFormat.test(formData.phonenumber)){
+          errMsg.phonenumber =' Format 000-000-0000 expected'
+            
+        }
+        if (formData.streetAddress === "") {
+          errMsg.streetAddress ='address is required'
+        }
+        if (formData.city === "") {
+          errMsg.city ='city is required'
+        }
+        if (formData.selectBedNum === "") {
+          errMsg.selectBedNum ='# bedroom is required'
+        }
+        if (formData.selectBathNum === "") {
+          errMsg.selectBathNum ='# bathroom is required'
+        }
+        if (formData.zipcode === "") {
+          errMsg.zipcode ='zipcode is required'
+        }else if(formData.zipcode.length !== 5){
+          errMsg.zipcode ='zipcode doesn\'t match'
+        }else if(isNaN(formData.zipcode)){
+          errMsg.zipcode ='only numbers acccepted'
+        }
 
-  if (formData.selectCleanType === "") {
-    errMsg.selectCleanType ='cleaning type is required'
-  }
-  if (formData.cleaningDate ==='') {
-    errMsg.cleaningDate ='Cleaning date is required'
-  }
-  if (formData.selectCleanTime ==='') {
-    errMsg.selectCleanTime ='Cleaning time is required'
-  }
+        if (formData.selectCleanType === '') {
+          errMsg.selectCleanType ='Cleaning type is required'
+        }
+
+        if(formData.cleaningFrequency !=='1' 
+          && formData.cleaningFrequency !=='0.7' 
+          && formData.cleaningFrequency !=='0.75' 
+          && formData.cleaningFrequency !=='0.8' ){
+            errMsg.cleaningFrequency ='cleaning frequence is required'
+        }
+        
+        if (formData.cleaningDate ==='') {
+          errMsg.cleaningDate ='Cleaning date is required'
+        }
+        if (formData.selectCleanTime ==='') {
+          errMsg.selectCleanTime ='Cleaning time is required'
+        }
 
         return errMsg;
-      }
+  }
+     
+  // end
 
       
       // const formError = formValidation()
@@ -378,8 +394,13 @@ const Booking = () =>{
       }
         
       const isChecked = (value) => formData.cleaningFrequency === value;     
-          
+      // console.log(formData.cleaningFrequency, formData.selectCleanType)
+
       
+          
+      const scrollTop = () =>{
+        window.scrollTo(0,0)
+      }
       
       useEffect(() =>{
         
@@ -435,6 +456,8 @@ const Booking = () =>{
             console.log(initialState);
           })
         // -----------END------------------
+        }else{
+          scrollTop()
         }
         
       }
@@ -465,7 +488,9 @@ const Booking = () =>{
                   <p> {formError.selectBedNum} </p>
                   <p> {formError.selectBathNum} </p>
                   <p> {formError.cleaningDate} </p>
+                  <p>{formError.selectCleanType}</p>
                   <p> {formError.selectCleanTime} </p>
+                  <p>{formError.cleaningFrequency}</p> 
 
                 </div>
               <h3>Personal Information:</h3>  
@@ -475,8 +500,9 @@ const Booking = () =>{
                     key={input.id}
                     {...input}
                     type={input.type}
-                    value={formData[input.name]}
+                    value={formData[input.name]}                    
                     onChange={handleFormChange}
+                    
                   />
                 ))}
               </div>
@@ -501,6 +527,7 @@ const Booking = () =>{
             <SelectItem
               label="# of bathroom"
               options={[
+                
                 {label: "One bathroom", value: 1},
                 {label: "Two bathrooms", value: 2},
                 {label: "Three bathrooms", value: 3},

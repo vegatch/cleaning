@@ -17,7 +17,7 @@ const Extra = ({label, price, name, id, title, myLabel, value, tile, onChange, .
                     type="checkbox"/>
                     {label}
                 </label>
-                <span class="checkmark"></span>
+                <span className="checkmark"></span>
             </div> 
             {
             value === true ? 

@@ -12,6 +12,10 @@
     background-color: var(--bg-color-intro);    
 }
 
+.ads-section{
+    background-color: var(--bg-blue);
+}
+
 .benefit-section h3,
 .faq-section h3,
 .contact-section > h3{

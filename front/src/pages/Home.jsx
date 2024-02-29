@@ -90,7 +90,7 @@ const Home = () => {
                 <Faq />             
             </div>
             {/* Serives and Products */}
-            <div>
+            <div className="ads-section">
                 <Ads />
             </div>
              {/* Contact us Section */}

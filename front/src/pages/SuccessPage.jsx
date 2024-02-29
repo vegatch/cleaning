@@ -3,6 +3,11 @@ import Banner from '../components/Banner/Banner.jsx'
 import '../CSS/success.css'
 
 const Success = () =>{
+    
+    React.useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
+
     return(
         <div className="page-container">
             <div className="thanks-container">
